@@ -1,0 +1,9 @@
+[package]
+name = "fsdiag"
+version = "0.1.0"
+authors = ["Abovegame"]
+
+[dependencies]
+clap = "*"
+rust-crypto = "*"
+time = "*"
