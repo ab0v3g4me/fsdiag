@@ -4,6 +4,7 @@ extern crate time;
 
 use crypto::digest::Digest;
 use std::fs;
+use std::process;
 use std::path;
 use std::io::{Read,Write};
 use std::os::linux::fs::MetadataExt;
@@ -87,7 +88,7 @@ fn search(p: &std::path::Path,files: &mut Vec<std::path::PathBuf>,extension: Opt
         else if let Some(new_date) = new_opt{
             let nd = match new_date.parse::<i64>(){
                 Ok(n) => n,
-                Err(_) => {println!("{}[-]{} Bad input argument for `--new` option.",RED, DEFAULT);return;}
+                Err(_) => {println!("{}[-]{} Bad input argument for `--new` option.",RED, DEFAULT);process::exit(1);}
             };
             let dayspassed = ( time::now().to_timespec().sec - ent.path().metadata().unwrap().st_ctime() ) / 86400;
             if nd >= dayspassed { println!("{}[+]{} Found file - {}", YELLOW, DEFAULT, ent.path().to_str().unwrap() );}
